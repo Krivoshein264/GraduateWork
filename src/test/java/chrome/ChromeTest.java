@@ -12,6 +12,8 @@ public class ChromeTest extends BaseTest {
     RepaymentService repaymentService = new RepaymentService();
     SmallBusinessPage smallBusinessPage = new SmallBusinessPage();
     DepozitPage depozitPage = new DepozitPage();
+    CorporateBusinessPage corporateBusinessPage = new CorporateBusinessPage();
+    GroupsOfCompaniesPage groupsOfCompaniesPage = new GroupsOfCompaniesPage();
     @Test()
     @Description("Проверка что кнопка Адреса ведет по ссылке на карту")
     @DisplayName("Проверка ссылки кнопки адрес")
@@ -47,5 +49,14 @@ public class ChromeTest extends BaseTest {
         smallBusinessPage.openDepozit();
         depozitPage.dataInput();
         depozitPage.checkError();
+    }
+    @Test()
+    @Description("Проверка что в разделе Корпоративный бизнес/Расчетно-кассовое обслуживание/Группам компаний выпадающие элементы выпадают и заполнены")
+    @DisplayName("Проверка выпадающих элементов в Группах компаний")
+    public void groupsOfCompaniesTest() {
+        homePage.openPage()
+                .corporateBusinessOpen();
+        corporateBusinessPage.groupsOfCompaniesClick();
+        groupsOfCompaniesPage.checkOpen();
     }
 }
