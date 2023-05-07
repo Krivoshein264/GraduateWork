@@ -5,4 +5,6 @@ import org.aeonbits.owner.Config;
 public interface ProjectConfig extends Config {
     @Key("base_url")
     String baseUrl();
+    @Key("phone")
+    String phone();
 }

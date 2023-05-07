@@ -1,9 +1,6 @@
 package chrome;
 
-import chrome.chromePages.BlogPage;
-import chrome.chromePages.HomePage;
-import chrome.chromePages.RepaymentService;
-import chrome.chromePages.SmallBusinessPage;
+import chrome.chromePages.*;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +11,7 @@ public class ChromeTest extends BaseTest {
     HomePage homePage = new HomePage();
     RepaymentService repaymentService = new RepaymentService();
     SmallBusinessPage smallBusinessPage = new SmallBusinessPage();
+    DepozitPage depozitPage = new DepozitPage();
     @Test()
     @Description("Проверка что кнопка Адреса ведет по ссылке на карту")
     @DisplayName("Проверка ссылки кнопки адрес")
@@ -39,5 +37,15 @@ public class ChromeTest extends BaseTest {
         homePage.openPage()
                 .smallBusinessClick();
         smallBusinessPage.blockClick();
+    }
+    @Test()
+    @Description("Проверка что при заполнении формы в разделе 'Депозиты' если не проставить чекбокс соглашения на обработку появится ошибка")
+    @DisplayName("Проверка появления ошибки не проставления чекбокса соглашения на обработку")
+    public void depozitTest() {
+        homePage.openPage()
+                .smallBusinessClick();
+        smallBusinessPage.openDepozit();
+        depozitPage.dataInput();
+        depozitPage.checkError();
     }
 }
