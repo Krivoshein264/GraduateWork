@@ -13,6 +13,7 @@ public class GroupsOfCompaniesPage {
         for (SelenideElement selenideElement : allElements) {
             selenideElement.click();
             $(OPENED_ELEMENT).click();
+            selenideElement.click();
         }
     }
 }
