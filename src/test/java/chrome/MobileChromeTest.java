@@ -26,7 +26,16 @@ public class MobileChromeTest extends MobileBaseTest {
     public void ipotekaValue() {
         homePageMobile.openPage().acceptCity();
         homePageMobile.individualsOpen();
-        creditsPageMobile.ipotekaForIT();
+        creditsPageMobile.ipotekaOpen();
         ipotekaPageMobile.valueCheck();
+    }
+    @Test
+    @Description("Проверка что в разделе Ипотека в калькуляторе при выборе Рефинансирования в цели кредита появляется чекбокс Зарплатный клиент ПАО «МТС-Банк»")
+    @DisplayName("Проверка появления чекбокса Зарплатный клиент при выборе Рефинансирования в калькуляторе Ипотеки")
+    public void checkBoxTest() {
+        homePageMobile.openPage().acceptCity();
+        homePageMobile.individualsOpen();
+        creditsPageMobile.ipotekaOpen();
+        ipotekaPageMobile.checkBoxCheck();
     }
 }
