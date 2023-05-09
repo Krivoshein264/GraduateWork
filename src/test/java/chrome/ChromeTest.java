@@ -1,6 +1,7 @@
 package chrome;
 
 import chrome.chromePages.*;
+import chrome.mobileChromePages.HomePageMobile;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideDriver;
 import jdk.jfr.Description;
@@ -16,6 +17,7 @@ public class ChromeTest extends BaseTest {
     DepozitPage depozitPage = new DepozitPage();
     CorporateBusinessPage corporateBusinessPage = new CorporateBusinessPage();
     GroupsOfCompaniesPage groupsOfCompaniesPage = new GroupsOfCompaniesPage();
+
     @Test()
     @Description("Проверка что кнопка Адреса ведет по ссылке на карту")
     @DisplayName("Проверка ссылки кнопки адрес")
@@ -56,9 +58,11 @@ public class ChromeTest extends BaseTest {
     @Description("Проверка что в разделе Корпоративный бизнес/Расчетно-кассовое обслуживание/Группам компаний выпадающие элементы выпадают и заполнены")
     @DisplayName("Проверка выпадающих элементов в Группах компаний")
     public void groupsOfCompaniesTest() {
-        homePage.openPage()
-                .corporateBusinessOpen();
+                homePage.openPage();
+                        homePage.corporateBusinessOpen();
         corporateBusinessPage.groupsOfCompaniesClick();
         groupsOfCompaniesPage.checkOpen();
     }
+
+
 }
