@@ -1,6 +1,9 @@
 package chrome;
 
+import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import config.ProjectConfig;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,14 +17,15 @@ import java.util.Map;
 public abstract class MobileBaseTest  {
     public static final ProjectConfig config = ConfigFactory.create(ProjectConfig.class);
     public static WebDriver driver;
-    static ChromeOptions chromeOptions;
     @BeforeAll
     public static void setUp() {
         Map<String, String> mobileEmulation = new HashMap<>();
         mobileEmulation.put("deviceName", "iPhone 8");
-        chromeOptions = new ChromeOptions();
+        ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
         driver = new ChromeDriver(chromeOptions);
+        WebDriverRunner.setWebDriver(driver);
+        //SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
     @AfterAll
     public static void turnDown() {

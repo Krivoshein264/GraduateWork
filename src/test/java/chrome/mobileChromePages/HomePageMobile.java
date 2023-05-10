@@ -16,7 +16,6 @@ public class HomePageMobile {
     private static final By CLIENTS_HELP = By.xpath("//div[text()='Помощь клиентам']");
     private static final By SAFETY_REGULATIONS = By.xpath("//div[text()='Правила безопасности']");
     public HomePageMobile openPage() {
-        WebDriverRunner.setWebDriver(driver);
         driver.get(config.baseUrl());
         return this;
     }
@@ -30,9 +29,9 @@ public class HomePageMobile {
     public void citySelection(String city) {
         $(CITY_CLICK).click();
         try {
-            $(By.xpath("//ul[@class='sc-dWddBi bxuBnY']//button[text()='" + city + "']")).click();
+            $(By.xpath("//ul[@class='sc-dWddBi bxuBnY']//button[text()='" + city + "']")).hover().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            $(By.xpath("//ul[@class='sc-kYrlTI ffNyOp']//button[text()='" + city + "']")).click();
+            $(By.xpath("//ul[@class='sc-kYrlTI ffNyOp']//button[text()='" + city + "']")).hover().click();
         }
     }
     public void cityCheck(String city) {
