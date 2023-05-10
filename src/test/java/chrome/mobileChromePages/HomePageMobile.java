@@ -12,7 +12,9 @@ public class HomePageMobile {
     private static final By ACCEPT_CITY = By.xpath("//button[@class='Wrapper-sc-48arcs-1 jHfosx']");
     private static final By INDIVIDUALS = By.xpath("//div[text()='Частным лицам']");
     private static final By CREDITS_AND_IPOTEKA = By.xpath("//div[text()='Кредиты и ипотека']");
-    private static final By TELEGA = By.xpath("//a[@href=\"https://t.me/mts_bank_official\"]");
+    private static final By MTS_BANK_APP = By.xpath("//div[text()='Установите МТС Банк на смартфон']");
+    private static final By CLIENTS_HELP = By.xpath("//div[text()='Помощь клиентам']");
+    private static final By SAFETY_REGULATIONS = By.xpath("//div[text()='Правила безопасности']");
     public HomePageMobile openPage() {
         WebDriverRunner.setWebDriver(driver);
         driver.get(config.baseUrl());
@@ -37,8 +39,14 @@ public class HomePageMobile {
         Assertions.assertEquals(city, $(CITY_CLICK).getText());
     }
     public void individualsOpen() {
-        $(TELEGA).hover();
+        $(MTS_BANK_APP).hover();
         $(INDIVIDUALS).click();
         $(CREDITS_AND_IPOTEKA).click();
+    }
+    public void securityOpen() {
+        $(MTS_BANK_APP).hover();
+        $(CLIENTS_HELP).click();
+        $(MTS_BANK_APP).hover();
+        $(SAFETY_REGULATIONS).click();
     }
 }

@@ -3,6 +3,7 @@ package chrome;
 import chrome.mobileChromePages.CreditsPageMobile;
 import chrome.mobileChromePages.HomePageMobile;
 import chrome.mobileChromePages.IpotekaPageMobile;
+import chrome.mobileChromePages.SafetyRegulationsPage;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ public class MobileChromeTest extends MobileBaseTest {
     HomePageMobile homePageMobile = new HomePageMobile();
     CreditsPageMobile creditsPageMobile = new CreditsPageMobile();
     IpotekaPageMobile ipotekaPageMobile = new IpotekaPageMobile();
+    SafetyRegulationsPage safetyRegulationsPage = new SafetyRegulationsPage();
     @Description("Проверка что при смене города на главной странице будет отображаться новый город")
     @DisplayName("Проверка отображения нового города при смене")
     @ParameterizedTest
@@ -49,5 +51,14 @@ public class MobileChromeTest extends MobileBaseTest {
         homePageMobile.individualsOpen();
         creditsPageMobile.ipotekaOpen();
         ipotekaPageMobile.downloadFile();
+    }
+    @Test
+    @Description("Проверка что при прохождении теста 'Обмани мошенника' в разделе Правила безопасности в конце он выдает правильное кол-во правильных ответов Результат 4/4")
+    @DisplayName("Проверка теста 'Обмани мошенника'")
+    public void securityTestTest() {
+        homePageMobile.openPage().acceptCity();
+        homePageMobile.securityOpen();
+        safetyRegulationsPage.testCheck();
+        safetyRegulationsPage.resultCheck();
     }
 }
