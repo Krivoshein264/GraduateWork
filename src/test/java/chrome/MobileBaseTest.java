@@ -25,6 +25,8 @@ public abstract class MobileBaseTest  {
     }
     @AfterAll
     public static void turnDown() {
+        driver.manage().deleteAllCookies();
         driver.quit();
+
     }
 }

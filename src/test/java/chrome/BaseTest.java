@@ -7,9 +7,7 @@ import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
 
-import static chrome.MobileBaseTest.driver;
 
 public abstract class BaseTest {
     public static final ProjectConfig config = ConfigFactory.create(ProjectConfig.class);

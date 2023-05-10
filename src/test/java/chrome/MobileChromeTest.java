@@ -8,6 +8,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.io.FileNotFoundException;
+
 public class MobileChromeTest extends MobileBaseTest {
     HomePageMobile homePageMobile = new HomePageMobile();
     CreditsPageMobile creditsPageMobile = new CreditsPageMobile();
@@ -37,5 +40,14 @@ public class MobileChromeTest extends MobileBaseTest {
         homePageMobile.individualsOpen();
         creditsPageMobile.ipotekaOpen();
         ipotekaPageMobile.checkBoxCheck();
+    }
+    @Test
+    @Description("Проверка что в разделе Ипотека во вкладке Погашение кредита в блоке Выберете способы погашения файл Инструкция.PDF скачивается, в данном случае build/downloads ")
+    @DisplayName("Проверка скачивания файла Инструкция.PDF")
+    public void downloadPDF() throws FileNotFoundException {
+        homePageMobile.openPage().acceptCity();
+        homePageMobile.individualsOpen();
+        creditsPageMobile.ipotekaOpen();
+        ipotekaPageMobile.downloadFile();
     }
 }
