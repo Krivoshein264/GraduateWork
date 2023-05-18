@@ -19,6 +19,8 @@ public abstract class MobileBaseTest  {
     public static WebDriver driver;
     @BeforeAll
     public static void setUp() {
+        System.clearProperty("mobileEmulation");
+        System.clearProperty("chromeOptions");
         Map<String, String> mobileEmulation = new HashMap<>();
         mobileEmulation.put("deviceName", "iPhone 8");
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -29,6 +31,8 @@ public abstract class MobileBaseTest  {
     }
     @AfterAll
     public static void turnDown() {
+        System.clearProperty("mobileEmulation");
+        System.clearProperty("chromeOptions");
         driver.manage().deleteAllCookies();
         driver.quit();
 
