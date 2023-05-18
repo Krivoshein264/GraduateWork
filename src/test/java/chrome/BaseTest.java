@@ -23,7 +23,7 @@ public abstract class BaseTest {
         Configuration.driverManagerEnabled = true;
         Configuration.headless = false;
         Configuration.browserSize = "1920x1080";
-        Configuration.pageLoadTimeout = 10000000L;
+        Configuration.pageLoadTimeout = 1000000L;
         Configuration.timeout = 1000000L;
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         System.setProperty("chromeoptions.args", "\"--no-sandbox\",\"--disable-dev-shm-usage\",\"--remote-debugging-port=9222\"");
