@@ -1,5 +1,6 @@
 package chrome.chromePages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import static chrome.BaseTest.config;
 import static com.codeborne.selenide.Selenide.$;
@@ -10,16 +11,18 @@ public class HomePage {
     private static final By BLOG = By.xpath("//a[@href='https://www.mtsbank.ru/articles/']/div/h2");
     private static final By SMALL_BUSINESS = By.xpath("//a[@href='/malomu-biznesu/']");
     private static final By CORPORATE_BUSINESS = By.xpath("//a[@href='/korporativnim-klientam/']");
-    static int window = 1;
+    //static int window = 1;
+    @Step("Открыть главную страницу")
     public HomePage openPage() {
-
         open(config.baseUrl());
         return this;
     }
+    @Step("Навести на сервисы и услуги, перейти в Пополнение карт и погашение кредитов")
     public void servicesCardsAndCredits() {
         $(SERVICES).hover();
         $(SERVICES_CARDS_AND_CREDITS).click();
     }
+    @Step("Перейти в блог")
     public void blog() {
         $(BLOG).click();
     }

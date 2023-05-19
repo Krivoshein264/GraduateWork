@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class BlogPage {
 private static final By PARAM_BLOG = By.xpath("//a[@class='LinkWrapper-sc-a7l7fm-0 eaxjcO sc-jSgvzq itKQXv']");
     public static void productClick(String product) {
-        switchTo().window(HomePage.window);
+        switchTo().window(1);
         $(By.xpath("//div[text()='" + product +"']")).click();
         HomePage.window++;
     }
