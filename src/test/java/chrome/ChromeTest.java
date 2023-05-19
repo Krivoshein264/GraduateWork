@@ -1,9 +1,6 @@
 package chrome;
 
 import chrome.chromePages.*;
-import chrome.mobileChromePages.HomePageMobile;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideDriver;
 import io.qameta.allure.*;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.DisplayName;
@@ -44,16 +41,16 @@ public class ChromeTest extends BaseTest {
         BlogPage.checkParameter(product);
     }
     @Test()
-    @Tag("reg")
+    @Tag("smoke")
     @Description("Проверка что в каждом из блоков, часть ссылок которых содержит /malomu-biznesu/ в разделе 'Малый бизнес и ИП', есть поля для оформления заявки с кнопкой 'Отправить заявку'")
-    @DisplayName("Проверка кнопки 'Отправить заявку' в блоках ссылка которых содержит /malomu-biznesu/")
+    @DisplayName("Проверка наличия кнопки 'Отправить заявку' в блоках ссылка которых содержит /malomu-biznesu/")
     public void smallBusinessTest() {
         homePage.openPage()
                 .smallBusinessClick();
         smallBusinessPage.blockClick();
     }
     @Test()
-    @Tag("reg")
+    @Tag("smoke")
     @Description("Проверка что при заполнении формы в разделе 'Депозиты' если не проставить чекбокс соглашения на обработку появится ошибка")
     @DisplayName("Проверка появления ошибки не проставления чекбокса соглашения на обработку")
     public void depozitTest() {
@@ -65,14 +62,12 @@ public class ChromeTest extends BaseTest {
     }
     @Test()
     @Tag("reg")
-    @Description("Проверка что в разделе Корпоративный бизнес/Расчетно-кассовое обслуживание/Группам компаний выпадающие элементы выпадают и заполнены")
-    @DisplayName("Проверка выпадающих элементов в Группах компаний")
+    @Description("Проверка что в разделе 'Корпоративный бизнес/Расчетно-кассовое обслуживание/Группам компаний' выпадающие элементы выпадают и заполнены")
+    @DisplayName("Проверка выпадающих элементов в 'Группах компаний'")
     public void groupsOfCompaniesTest() {
                 homePage.openPage();
                         homePage.corporateBusinessOpen();
         corporateBusinessPage.groupsOfCompaniesClick();
         groupsOfCompaniesPage.checkOpen();
     }
-
-
 }

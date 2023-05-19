@@ -11,7 +11,6 @@ public class HomePage {
     private static final By BLOG = By.xpath("//a[@href='https://www.mtsbank.ru/articles/']/div/h2");
     private static final By SMALL_BUSINESS = By.xpath("//a[@href='/malomu-biznesu/']");
     private static final By CORPORATE_BUSINESS = By.xpath("//a[@href='/korporativnim-klientam/']");
-    //static int window = 1;
     @Step("Открыть главную страницу")
     public HomePage openPage() {
         open(config.baseUrl());
@@ -26,9 +25,11 @@ public class HomePage {
     public void blog() {
         $(BLOG).click();
     }
+    @Step("Нажать 'Малый бизнес и ИП'")
     public void smallBusinessClick() {
         $(SMALL_BUSINESS).click();
     }
+    @Step("Нажать 'Корпоративный бизнес'")
     public void corporateBusinessOpen() {
         $(CORPORATE_BUSINESS).click();
     }
