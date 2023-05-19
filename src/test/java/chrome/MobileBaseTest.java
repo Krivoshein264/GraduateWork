@@ -24,7 +24,7 @@ public abstract class MobileBaseTest  {
         Map<String, String> mobileEmulation = new HashMap<>();
         mobileEmulation.put("deviceName", "iPhone 8");
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
+        //chromeOptions.addArguments("--headless");
         chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
         driver = new ChromeDriver(chromeOptions);
         WebDriverRunner.setWebDriver(driver);

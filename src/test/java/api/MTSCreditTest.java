@@ -5,6 +5,7 @@ import api.steps.MTSCreditSteps;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,13 +17,14 @@ import static io.restassured.RestAssured.given;
 @Story("Методы для работы с пользователем")
 @Link(name = "Документация сервиса", url = "https://reqres.in/")
 @Owner("Долженко Артём")
+@Tag("smoke")
 public class MTSCreditTest {
     static MTSCreditSteps mtsCreditSteps = new MTSCreditSteps();
     public static String token;
-    public static String orderId;
     public static String errorOrderId = "a68585f1-7096-4603-a622-ecca0cdc6347";
     public static String status = "IN_PROGRESS";  //REFUSED APPROVED
     @Test
+    @Tag("smoke")
     @Description("Проверяем, что аутентификация пройдет успешно с данными выданными с документацией проекта. Получение токена")
     @DisplayName("'POST' Успешная аутентификация и получение токена")
     public void successAuthenticationUser() {
@@ -37,23 +39,22 @@ public class MTSCreditTest {
         Data response = mtsCreditSteps.getTariffs();
         mtsCreditSteps.checkEMail(response);
     }
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3,} )
+    @Test
     @Description("Проверяем, что при методе подачи заявки на кредит в теле ответа есть orderId")
     @DisplayName("'POST' Успешная проверка метода подачи заявки на кредит")
-    public void successOrderCheck(int tariffId) {
+    public void successOrderCheck() {
         successAuthenticationUser();
-       Order payload = new Order(1, tariffId);
+       Order payload = new Order(1, 1);
        OrderId response = mtsCreditSteps.getOrder(payload, token);
        mtsCreditSteps.checkOrderId(response);
-       orderId = response.getOrderId();
     }
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {0, 4, 1000})
     @Description("Проверяем, что при методе подачи заявки на кредит в теле запроса нельзя указать несуществующий номер тарифа")
     @DisplayName("'POST' Негативная проверка метода подачи заявки на кредит выбрав несуществующий тариф")
-    public void errorOrderCheck() {
+    public void errorOrderCheck(int tariffId) {
         successAuthenticationUser();
-        Order payload = new Order(1, 0);
+        Order payload = new Order(1, tariffId);
         ErrorOrder response = mtsCreditSteps.errorPostLoan(payload, token);
         mtsCreditSteps.checkErrorOrder(response, "TARIFF_NOT_FOUND");
     }
@@ -62,7 +63,10 @@ public class MTSCreditTest {
     @DisplayName("'GET' Успешная проверка соответствия статуса ордера в методе получения статуса заявки")
     public void successStatusOrderCheck() {
         successAuthenticationUser();
-        Response response = mtsCreditSteps.getAllOrderStatuses(orderId, token);
+        Order payload = new Order(1, 2);
+        OrderId response2 = mtsCreditSteps.getOrder(payload, token);
+        String orderId2 = response2.getOrderId();
+        Response response = mtsCreditSteps.getAllOrderStatuses(orderId2, token);
         mtsCreditSteps.checkOrdersId(response, status);
     }
     @Test
@@ -78,8 +82,11 @@ public class MTSCreditTest {
     @DisplayName("'DELETE' Успешное удаление существующей заявки")
     public void successDeleteOrder() {
         successAuthenticationUser();
-        DeleteOrder payload = new DeleteOrder( 1L, orderId);
-        mtsCreditSteps.deleteOrder(payload, token);
+        Order payload = new Order(1, 3);
+        OrderId response3 = mtsCreditSteps.getOrder(payload, token);
+        String orderId3 = response3.getOrderId();
+        DeleteOrder deletePayload = new DeleteOrder( 1L, orderId3);
+        mtsCreditSteps.deleteOrder(deletePayload, token);
     }
     @Test
     @Description("Проверяем, что при удалении несуществующей заявки выдаст ошибку ORDER_NOT_FOUND")

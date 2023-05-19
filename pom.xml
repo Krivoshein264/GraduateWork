@@ -59,13 +59,17 @@
             <artifactId>owner-java8</artifactId>
             <version>1.0.8</version>
         </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>RELEASE</version>
-            <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>1.8.2</version>
+        </dependency>
+        <!--JUnit Jupiter Engine to depend on the JUnit4 engine and JUnit 4 API  -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
