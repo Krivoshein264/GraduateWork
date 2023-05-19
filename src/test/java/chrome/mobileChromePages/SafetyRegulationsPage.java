@@ -1,5 +1,6 @@
 package chrome.mobileChromePages;
 
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.$;
@@ -14,6 +15,7 @@ public class SafetyRegulationsPage {
     private static final By BUTTON_NEXT4 = By.xpath("//button[@data-result-filedset='quiz-final']");
     private static final By RESULT = By.xpath("//h5[text()='Результат 4/4 ']");
     String result = "Результат 4/4";
+    @Step("Внизу страницы в тесте отметить варианты 1-3, 2-3, 3-2, 4-2")
     public void testCheck() {
         $(FIRST_CORRECT_ANSWER).click();
         $(BUTTON_NEXT).click();
@@ -24,6 +26,7 @@ public class SafetyRegulationsPage {
         $(FOURTH_CORRECT_ANSWER).click();
         $(BUTTON_NEXT4).click();
     }
+    @Step("Убедиться что 'Результат 4/4'")
     public void resultCheck() {
         Assertions.assertEquals(result, $(RESULT).getText());
     }

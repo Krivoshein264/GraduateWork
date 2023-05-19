@@ -1,6 +1,6 @@
 package chrome.mobileChromePages;
 
-import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 
@@ -15,6 +15,7 @@ public class HomePageMobile {
     private static final By MTS_BANK_APP = By.xpath("//div[text()='Установите МТС Банк на смартфон']");
     private static final By CLIENTS_HELP = By.xpath("//div[text()='Помощь клиентам']");
     private static final By SAFETY_REGULATIONS = By.xpath("//div[text()='Правила безопасности']");
+    @Step("Открыть домашнюю страницу")
     public HomePageMobile openPage() {
         driver.get(config.baseUrl());
         return this;
@@ -26,6 +27,7 @@ public class HomePageMobile {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
         }
     }
+    @Step("Нажать на город и в появившемся списке выбрать новый")
     public void citySelection(String city) {
         $(CITY_CLICK).click();
         try {
@@ -34,14 +36,17 @@ public class HomePageMobile {
             $(By.xpath("//ul[@class='sc-kYrlTI ffNyOp']//button[text()='" + city + "']")).hover().click();
         }
     }
+    @Step("Проверить что на главной странице отображается выбранный город")
     public void cityCheck(String city) {
         Assertions.assertEquals(city, $(CITY_CLICK).getText());
     }
+    @Step("Внизу страницы раскрыть список 'Частным лицам' и выбрать 'Кредиты и ипотека'")
     public void individualsOpen() {
         $(MTS_BANK_APP).hover();
         $(INDIVIDUALS).click();
         $(CREDITS_AND_IPOTEKA).click();
     }
+    @Step("Внизу страницы раскрыть список 'Помощь клиентам' и выбрать 'Правила безопасности'")
     public void securityOpen() {
         $(MTS_BANK_APP).hover();
         $(CLIENTS_HELP).click();
