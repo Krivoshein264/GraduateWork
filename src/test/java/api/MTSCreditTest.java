@@ -10,14 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static io.restassured.RestAssured.given;
-
 @Epic("Api tests")
-@Feature("Reqres service")
-@Story("Методы для работы с пользователем")
-@Link(name = "Документация сервиса", url = "https://reqres.in/")
-@Owner("Долженко Артём")
-@Tag("smoke")
+@Feature("mts-credit tests")
+@Story("Методы для работы с развернутым локально проектом mts-credit")
+@Owner("Кривошеин Антон")
 public class MTSCreditTest {
     static MTSCreditSteps mtsCreditSteps = new MTSCreditSteps();
     public static String token;
@@ -33,6 +29,7 @@ public class MTSCreditTest {
         token = response.getToken();
     }
     @Test
+    @Tag("smoke")
     @Description("Проверяем, что в полученном списке тарифов есть тарифы из ТЗ")
     @DisplayName("'GET' Успешная проверка списка тарифов")
     public void successGetTariffs() {
@@ -40,6 +37,7 @@ public class MTSCreditTest {
         mtsCreditSteps.checkEMail(response);
     }
     @Test
+    @Tag("smoke")
     @Description("Проверяем, что при методе подачи заявки на кредит в теле ответа есть orderId")
     @DisplayName("'POST' Успешная проверка метода подачи заявки на кредит")
     public void successOrderCheck() {
@@ -49,6 +47,7 @@ public class MTSCreditTest {
        mtsCreditSteps.checkOrderId(response);
     }
     @ParameterizedTest
+    @Tag("smoke")
     @ValueSource(ints = {0, 4, 1000})
     @Description("Проверяем, что при методе подачи заявки на кредит в теле запроса нельзя указать несуществующий номер тарифа")
     @DisplayName("'POST' Негативная проверка метода подачи заявки на кредит выбрав несуществующий тариф")
@@ -59,6 +58,7 @@ public class MTSCreditTest {
         mtsCreditSteps.checkErrorOrder(response, "TARIFF_NOT_FOUND");
     }
     @Test
+    @Tag("smoke")
     @Description("Проверяем, что значение статуса ордера соответствует статусу этого ордера из ответа в методе получения статуса заявки")
     @DisplayName("'GET' Успешная проверка соответствия статуса ордера в методе получения статуса заявки")
     public void successStatusOrderCheck() {
@@ -70,6 +70,7 @@ public class MTSCreditTest {
         mtsCreditSteps.checkOrdersId(response, status);
     }
     @Test
+    @Tag("smoke")
     @Description("Проверяем, что выдаст ошибку при попытке запроса статуса несуществующей заявки")
     @DisplayName("'GET' Негативная проверка получения статуса несуществующей заявки")
     public void errorStatusOrderCheck() {
@@ -78,6 +79,7 @@ public class MTSCreditTest {
         mtsCreditSteps.checkErrorOrder(response, "ORDER_NOT_FOUND");
     }
     @Test
+    @Tag("smoke")
     @Description("Проверяем, что заявка успешно удалится")
     @DisplayName("'DELETE' Успешное удаление существующей заявки")
     public void successDeleteOrder() {
@@ -89,6 +91,7 @@ public class MTSCreditTest {
         mtsCreditSteps.deleteOrder(deletePayload, token);
     }
     @Test
+    @Tag("smoke")
     @Description("Проверяем, что при удалении несуществующей заявки выдаст ошибку ORDER_NOT_FOUND")
     @DisplayName("'DELETE' Негативное удаление несуществующей заявки")
     public void errorDeleteOrder() {

@@ -9,9 +9,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
 public class SpecHelper {
-
     private final static String URL = "http://localhost:8080/";
-
     public static RequestSpecification getRequestSpec() {
         return new RequestSpecBuilder()
                 .setBaseUri(URL)
@@ -20,13 +18,11 @@ public class SpecHelper {
                 .addFilter(new AllureRestAssured())
                 .build();
     }
-
     public static ResponseSpecification getResponseSpec(int httpStatus) {
         return new ResponseSpecBuilder()
                 .expectStatusCode(httpStatus)
                 .log(LogDetail.ALL)
                 .build();
     }
-
 }
 
