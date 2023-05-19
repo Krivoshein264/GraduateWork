@@ -1,0 +1,4 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"Web мобильный","Тесты https://www.mtsbank.ru/","Пользовательские тесты","0","1","0","0","0"
+"Api tests","mts-credit tests","Методы для работы с развернутым локально проектом mts-credit","10","0","0","0","0"
+"Web десктопный","Тесты https://www.mtsbank.ru/","Пользовательские тесты","0","10","0","0","0"
