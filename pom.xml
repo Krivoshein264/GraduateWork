@@ -36,7 +36,6 @@
             <artifactId>selenium-java</artifactId>
             <version>LATEST</version>
         </dependency>
-
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>

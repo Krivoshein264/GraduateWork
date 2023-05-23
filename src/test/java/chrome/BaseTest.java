@@ -17,22 +17,20 @@ public abstract class BaseTest {
     @BeforeAll
     public static void setUp() {
         System.clearProperty("mobileEmulation");
-        System.clearProperty("chromeOptions");
         WebDriverManager.chromedriver().setup();
         Configuration.browser = "chrome";
         Configuration.driverManagerEnabled = true;
         //Configuration.headless = true;
         Configuration.browserSize = "1920x1080";
-        Configuration.pageLoadTimeout = 700000L;
+        Configuration.pageLoadTimeout = 1000000L;
         Configuration.timeout = 10000L;
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         System.setProperty("chromeoptions.args", "\"--no-sandbox\",\"--disable-dev-shm-usage\",\"--remote-debugging-port=9222\"");
     }
     @AfterAll
     public static void turnDown() {
-        System.clearProperty("mobileEmulation");
-        System.clearProperty("chromeOptions");
         Selenide.closeWebDriver();
+        System.clearProperty("chromeOptions");
     }
 
 }

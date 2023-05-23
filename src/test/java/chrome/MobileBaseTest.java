@@ -19,25 +19,23 @@ public abstract class MobileBaseTest  {
     public static WebDriver driver;
     @BeforeAll
     public static void setUp() {
-        System.clearProperty("mobileEmulation");
         System.clearProperty("chromeOptions");
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         Map<String, String> mobileEmulation = new HashMap<>();
         mobileEmulation.put("deviceName", "iPhone 8");
         ChromeOptions chromeOptions = new ChromeOptions();
         //chromeOptions.addArguments("--headless");
         chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
-        //System.setProperty("chromeoptions.mobileEmulation", "deviceName=Nexus 5");
         driver = new ChromeDriver(chromeOptions);
         WebDriverRunner.setWebDriver(driver);
-
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
     @AfterAll
     public static void turnDown() {
-        System.clearProperty("mobileEmulation");
+        /*
+        System.clearProperty("chromeoptions.mobileEmulation");
         System.clearProperty("chromeOptions");
-        driver.manage().deleteAllCookies();
+        driver.manage().deleteAllCookies();*/
         driver.quit();
-
+        System.clearProperty("mobileEmulation");
     }
 }
